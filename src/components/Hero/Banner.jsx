@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Button } from "../Atoms";
 
 const Banner = () => {
   return (
@@ -14,11 +15,13 @@ const Banner = () => {
           Don&apos;t miss our Year End Sale! Enjoy 70% off on all history books.
           Shop now and save big!
         </p>
-        <Link to="/books">
-          <button className="w-[150px] px-4 py-3 rounded-sm bg-tertiary text-black">
-            Shop Now
-          </button>
-        </Link>
+
+        <Button
+          title="Shop Now"
+          link="/all-books"
+          styles="px-4 py-3 flex text-lg items-center justify-center gap-x-3 rounded-sm bg-tertiary text-black"
+          icon={AiOutlineShoppingCart}
+        />
       </div>
     </div>
   );

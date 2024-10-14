@@ -28,7 +28,7 @@ const advertisementData = [
 
 const Advertisement = () => {
   return (
-    <div className="mb-10 bg-[#DEDEDE]">
+    <div className="bg-[#DEDEDE]">
       <div className="max-w-[1440px] mx-auto">
         <div className="py-8 flex items-center justify-between">
           {advertisementData.map((item, index) => (

@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
+import { CgProfile } from "react-icons/cg";
 import {
   AiOutlineHeart,
   AiOutlineSearch,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-center z-10">
+    <div className="flex items-center justify-center z-50">
       {/* Main navigation container */}
-      <div className="flex items-center justify-between w-full px-8 py-3 bg-white shadow-lg">
+      <div className="flex items-center justify-between w-full px-8 py-3 bg-white shadow-lg fixed top-0 z-50">
         {/* Logo and store name section */}
         <div className="flex items-center gap-x-5 w-1/6">
           <Link to="/">
@@ -36,7 +36,7 @@ const Navbar = () => {
         {/* User action icons section */}
         <div className="w-1/6 flex items-center justify-center">
           <div className="flex items-center gap-x-5">
-            {/* Favorite items  */}
+            {/* Favorite items */}
             <div className="flex items-center">
               <div className="relative cursor-pointer">
                 <AiOutlineHeart size={30} />
@@ -49,7 +49,7 @@ const Navbar = () => {
             {/* Shopping cart items */}
             <div className="flex items-center">
               <div className="relative cursor-pointer">
-                <AiOutlineShoppingCart size={30} /> {/* Cart icon */}
+                <AiOutlineShoppingCart size={30} />
                 <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 text-white font-mono text-[12px] leading-tight text-center">
                   0
                 </span>
@@ -69,4 +69,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; // Export Navbar component for use in other parts of the app
+export default Navbar;
