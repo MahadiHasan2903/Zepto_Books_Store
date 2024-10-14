@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
   return (
     <div className="bg-hero bg-no-repeat bg-bottom bg-cover h-[90vh]">
-      <div className="flex flex-col justify-center h-full ml-40">
+      <div className="flex flex-col justify-center h-full w-[1440px] mx-auto">
         <p className="text-4xl font-medium text-gray-700 mb-4 font-Josefin">
           Year end sale!
         </p>
