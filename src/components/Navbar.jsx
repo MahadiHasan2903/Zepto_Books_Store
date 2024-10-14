@@ -9,7 +9,7 @@ import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center z-10">
       {/* Main navigation container */}
       <div className="flex items-center justify-between w-full px-8 py-3 bg-white shadow-lg">
         {/* Logo and store name section */}
