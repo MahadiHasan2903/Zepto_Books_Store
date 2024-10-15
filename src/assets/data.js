@@ -110,3 +110,11 @@ export const booksData = [
     thumbnail: bookThumbnail,
   },
 ];
+
+export const navItems = [
+  { to: "/", label: "Home" },
+  { to: "#about", label: "About" },
+  { to: "#contact-us", label: "Contact Us" },
+  { to: "#privacy", label: "Privacy Policy" },
+  { to: "#help", label: "Help" },
+];

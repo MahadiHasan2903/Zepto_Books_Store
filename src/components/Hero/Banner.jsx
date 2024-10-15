@@ -8,7 +8,7 @@ const Banner = () => {
         <p className="mb-4 text-4xl font-medium text-gray-700 font-Josefin">
           Year end sale!
         </p>
-        <h1 className="text-[52px] text-primary font-semibold mb-2 ">
+        <h1 className="text-[52px] text-tertiary font-semibold mb-2 ">
           Enjoy A Massive 70% Off <br /> For All History Books
         </h1>
         <p className="mb-4 font-Josefin">
