@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { CgProfile } from "react-icons/cg";
-import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { navItems } from "../../assets/data";
 
 const Navbar = () => {
@@ -40,16 +40,6 @@ const Navbar = () => {
               <div className="flex items-center">
                 <div className="relative cursor-pointer">
                   <AiOutlineHeart size={30} />
-                  <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 text-white font-mono text-[12px] leading-tight text-center">
-                    0
-                  </span>
-                </div>
-              </div>
-
-              {/* Shopping cart items */}
-              <div className="flex items-center">
-                <div className="relative cursor-pointer">
-                  <AiOutlineShoppingCart size={30} />
                   <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 text-white font-mono text-[12px] leading-tight text-center">
                     0
                   </span>
