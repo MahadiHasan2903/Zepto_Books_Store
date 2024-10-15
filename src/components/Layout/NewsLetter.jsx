@@ -11,7 +11,7 @@ const NewsLetter = () => {
             on upcoming events and specific offers.
           </p>
         </div>
-        <div className="flex items-center w-1/2">
+        <div className="flex items-center justify-end w-1/2">
           <input
             type="text"
             placeholder="Email Address"

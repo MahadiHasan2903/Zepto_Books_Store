@@ -34,7 +34,7 @@ const Navbar = () => {
           </div>
 
           {/* User action icons section */}
-          <div className="flex items-center justify-center w-1/6">
+          <div className="flex items-center justify-end w-1/6">
             <div className="flex items-center gap-x-5">
               {/* Favorite items */}
               <div className="flex items-center">
