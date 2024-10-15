@@ -1,12 +1,14 @@
 import { Banner, Advertisement } from "../components/Hero";
 import { NewArrivals } from "../components/Books";
+import { NewsLetter } from "../components/Layout";
 
 const Home = () => {
   return (
-    <div className="mb-10">
+    <div>
       <Banner />
       <Advertisement />
       <NewArrivals />
+      <NewsLetter />
     </div>
   );
 };

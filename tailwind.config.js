@@ -7,12 +7,15 @@ export default {
     },
     extend: {
       colors: {
-        primary: "#1b83c4",
-        secondary: "#11b7dd",
-        tertiary: "#ea830f",
+        primary: "#0171BB",
+        secondary: "#29ABDF",
+        tertiary: "#DE522F",
+        primary_background: "#F7F7F7",
+        secondary_background: "#232323",
       },
       backgroundImage: {
         hero: "url(./src/assets/bg_image.webp)",
+        footer: "url(./src/assets/footer.webp)",
       },
     },
   },

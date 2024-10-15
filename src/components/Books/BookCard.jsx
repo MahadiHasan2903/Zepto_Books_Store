@@ -11,29 +11,29 @@ const BookCard = ({ title, price, author, thumbnail }) => {
         <img
           src={thumbnail}
           alt={`${title} cover`}
-          className="w-full h-full object-contain"
+          className="object-contain w-full h-full"
         />
       </div>
-      <div className="absolute right-4 top-8 flex flex-col gap-y-2">
+      <div className="absolute flex flex-col right-4 top-8 gap-y-2">
         <AiFillEye
           size={20}
-          className="cursor-pointer bg-white text-tertiary rounded-full w-7 h-7 p-1"
+          className="p-1 bg-white rounded-full cursor-pointer text-tertiary w-7 h-7"
         />
         <AiOutlineHeart
           size={20}
-          className="cursor-pointer bg-white text-tertiary rounded-full w-7 h-7 p-1"
+          className="p-1 bg-white rounded-full cursor-pointer text-tertiary w-7 h-7"
         />
         <AiOutlineShoppingCart
           size={20}
-          className="cursor-pointer bg-white text-tertiary rounded-full w-7 h-7 p-1"
+          className="p-1 bg-white rounded-full cursor-pointer text-tertiary w-7 h-7"
         />
       </div>
       <div className="flex flex-col items-center justify-center mt-4">
-        <p className="font-Josefin uppercase text-sm">{author}</p>
-        <p className="font-Josefin text-xl font-medium my-2 text-center">
+        <p className="text-sm uppercase font-Josefin">{author}</p>
+        <p className="my-2 text-xl font-medium text-center font-Josefin">
           {title.length > 30 ? `${title.slice(0, 25)}...` : title}
         </p>
-        <p className="font-Josefin text-lg">${price.toFixed(2)}</p>
+        <p className="text-lg font-Josefin">${price.toFixed(2)}</p>
       </div>
     </div>
   );

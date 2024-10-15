@@ -2,7 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, AllBooks, BookDetails } from "./pages/index";
-import { Loader, Navbar } from "./components/Layout";
+import { Footer, Loader, Navbar } from "./components/Layout";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -27,6 +27,7 @@ const App = () => {
           <Route path="/books/:id" element={<BookDetails />} />
         </Routes>
       )}
+      <Footer />
     </BrowserRouter>
   );
 };
