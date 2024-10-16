@@ -19,7 +19,7 @@ const Banner = () => {
         <Button
           title="Shop Now"
           link="/all-books"
-          styles="px-4 font-semibold py-3 text-white flex text-lg items-center justify-center gap-x-3 rounded-sm bg-tertiary"
+          styles="px-4 font-semibold py-3 text-white flex text-lg items-center justify-center gap-x-3 rounded-md bg-tertiary"
           icon={AiOutlineShoppingCart}
         />
       </div>

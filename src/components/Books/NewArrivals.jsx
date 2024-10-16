@@ -53,7 +53,7 @@ const NewArrivals = () => {
         <Button
           title="View All Books"
           link="/all-books"
-          styles="px-4 font-semibold py-3 flex text-lg text-white items-center justify-center gap-x-3 rounded-sm bg-tertiary"
+          styles="px-4 font-semibold py-3 flex text-lg text-white items-center justify-center gap-x-3 rounded-md bg-tertiary"
           icon={GoArrowRight}
         />
       </div>
