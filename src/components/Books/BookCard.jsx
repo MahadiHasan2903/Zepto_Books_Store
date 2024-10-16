@@ -16,11 +16,11 @@ const BookCard = ({ id, title, authors, coverImage }) => {
       </Link>
       <div className="absolute flex flex-col right-4 top-4 gap-y-2">
         <AiFillEye
-          size={20}
+          size={25}
           className="p-1 bg-white rounded-full cursor-pointer text-tertiary w-7 h-7"
         />
         <AiOutlineHeart
-          size={20}
+          size={25}
           className="p-1 bg-white rounded-full cursor-pointer text-tertiary w-7 h-7"
         />
       </div>

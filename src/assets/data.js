@@ -66,3 +66,12 @@ export const navItems = [
   { to: "#privacy", label: "Privacy Policy" },
   { to: "#help", label: "Help" },
 ];
+
+export const genres = [
+  { value: "", label: "Select Genre" },
+  { value: "children", label: "Children" },
+  { value: "fiction", label: "Fiction" },
+  { value: "adventure", label: "Adventure" },
+  { value: "mystery", label: "Mystery" },
+  { value: "romance", label: "Romance" },
+];

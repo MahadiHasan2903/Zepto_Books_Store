@@ -5,21 +5,32 @@ import { BookCard } from "../components/Books";
 import { Loader } from "../components/Layout";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useNavigate, useLocation } from "react-router-dom";
+import { IoIosArrowDown } from "react-icons/io";
+import { genres } from "../assets/data";
 
 const AllBooks = () => {
-  // State variables for pagination, search, loading, and book data
-  const [page, setPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [genre, setGenre] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [books, setBooks] = useState([]);
-  const [totalBooks, setTotalBooks] = useState(1);
-  const [previousPage, setPreviousPage] = useState("");
-  const [nextPage, setNextPage] = useState("");
-
   // Hooks for navigation and location access
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useNavigate(); // Hook for programmatic navigation
+  const location = useLocation(); // Hook for accessing current URL location
+
+  // State variables for pagination, search, loading, and book data
+  const [page, setPage] = useState(1); // Current page number
+  const [searchTerm, setSearchTerm] = useState(""); // Search term for filtering books
+  const [genre, setGenre] = useState(""); // Selected genre for filtering books
+  const [loading, setLoading] = useState(false); // Loading state for API calls
+  const [books, setBooks] = useState([]); // Array to hold fetched book data
+  const [totalBooks, setTotalBooks] = useState(1); // Total number of books available
+  const [previousPage, setPreviousPage] = useState(""); // Previous page link for pagination
+  const [nextPage, setNextPage] = useState(""); // Next page link for pagination
+  const [isOpen, setIsOpen] = useState(false); // State for dropdown visibility
+  const [selectedGenre, setSelectedGenre] = useState(""); // Selected genre for dropdown
+
+  // Function to handle genre selection from the dropdown
+  const handleSelect = (value) => {
+    setSelectedGenre(value); // Update selected genre
+    setGenre(value); // Set genre for fetching books
+    setIsOpen(false); // Close the dropdown
+  };
 
   // Function to handle search requests and update the URL with current parameters
   const handleSearch = async () => {
@@ -58,7 +69,7 @@ const AllBooks = () => {
     handleSearch();
   }, [page]); // Dependency on page to re-fetch data when it changes
 
-  // Function to handle page changes
+  // Function to handle page changes (previous/next)
   const handlePageChange = (newPage) => {
     setPage(newPage); // Update the current page
   };
@@ -80,6 +91,7 @@ const AllBooks = () => {
     <div className="max-w-[1440px] mx-auto mt-40 mb-20">
       <SectionHeader title="All Books" /> {/* Section header for the page */}
       <div className="flex items-center mb-10 gap-x-5">
+        {/* Search input for book title */}
         <input
           type="text"
           placeholder="Enter Book Title"
@@ -87,23 +99,37 @@ const AllBooks = () => {
           onChange={(e) => setSearchTerm(e.target.value)} // Update search term on change
           className="w-full px-4 py-[10px] text-gray-600 bg-transparent border-2 font-Josefin border-secondary"
         />
-        <select
-          name="topic"
-          id="topic"
-          value={genre} // Controlled select for genre
-          onChange={(e) => setGenre(e.target.value)} // Update genre on change
-          className="py-[0.9rem] pl-5 text-white transition-all font-Josefin cursor-pointer bg-black"
-        >
-          <option value="" disabled>
-            Select Genre
-          </option>
-          <option value="children">Children</option>
-          <option value="fiction">Fiction</option>
-          <option value="adventure">Adventure</option>
-          <option value="mystery">Mystery</option>
-          <option value="romance">Romance</option>
-        </select>
+        {/* Dropdown for genre selection */}
+        <div className="relative w-64">
+          <div
+            className="flex justify-between items-center py-3 px-5 bg-black text-white font-Josefin cursor-pointer"
+            onClick={() => setIsOpen(!isOpen)} // Toggle dropdown visibility
+          >
+            <span>
+              {selectedGenre
+                ? genres.find((g) => g.value === selectedGenre)?.label
+                : "Select Genre"}
+              {/* Display selected genre or placeholder */}
+            </span>
+            <IoIosArrowDown size={20} /> {/* Dropdown arrow icon */}
+          </div>
 
+          {isOpen && (
+            <ul className="absolute z-10 w-full bg-black text-white font-Josefin">
+              {genres.map((genre) => (
+                <li
+                  key={genre.value}
+                  className="py-1 px-5 cursor-pointer hover:bg-gray-800"
+                  onClick={() => handleSelect(genre.value)} // Handle genre selection
+                >
+                  {genre.label} {/* Display genre label */}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Search button */}
         <button
           className={`${
             loading ? "disable cursor-not-allowed bg-gray-500" : "bg-primary"
@@ -119,127 +145,133 @@ const AllBooks = () => {
       {/* Display the extracted books */}
       <div className="my-20">
         {loading ? (
-          <Loader />
-        ) : (
+          <Loader /> // Display loader while fetching data
+        ) : books.length > 0 ? (
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {books.map((book, index) => (
-              <BookCard key={index} {...book} />
+              <BookCard key={index} {...book} /> // Render BookCard for each book
             ))}
           </div>
+        ) : (
+          <h1 className="text-3xl text-tertiary font-semibold font-Josefin text-center">
+            No Books Found {/* Message when no books are found */}
+          </h1>
         )}
       </div>
       <div className="flex items-center justify-center gap-x-3">
         {/* Previous button */}
         <button
-          onClick={() => handlePageChange(page - 1)}
-          disabled={page === 1 || previousPage === null}
+          onClick={() => handlePageChange(page - 1)} // Go to previous page
+          disabled={page === 1 || previousPage === null} // Disable if on the first page or no previous page
           className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
             page === 1 || previousPage === null
               ? "bg-gray-400 cursor-not-allowed border-gray-400"
               : "bg-secondary hover:bg-primary border-primary"
           } gap-x-2`}
         >
-          <BsArrowLeft size={20} /> Previous
+          <BsArrowLeft size={20} /> Previous {/* Previous button label */}
         </button>
 
         {/* Only render page numbers if books.length is greater than 0 */}
-        {books.length > 0 && totalBooks > 0 ? (
-          (() => {
-            const totalPages = Math.ceil(totalBooks / books.length);
-            const pageNumbers = [];
+        {books.length > 0 && totalBooks > 0
+          ? (() => {
+              const totalPages = Math.ceil(totalBooks / books.length); // Calculate total pages
+              const pageNumbers = []; // Array to hold page number buttons
 
-            // Show the first page if it's not the current page
-            if (page > 2) {
-              pageNumbers.push(
-                <button
-                  key={1}
-                  onClick={() => handlePageChange(1)}
-                  className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
-                    page === 1
-                      ? "bg-primary border-primary"
-                      : "bg-secondary hover:bg-primary border-primary"
-                  } gap-x-2`}
-                >
-                  1
-                </button>
-              );
-            }
+              // Show the first page if it's not the current page
+              if (page > 2) {
+                pageNumbers.push(
+                  <button
+                    key={1}
+                    onClick={() => handlePageChange(1)} // Go to first page
+                    className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+                      page === 1
+                        ? "bg-primary border-primary"
+                        : "bg-secondary hover:bg-primary border-primary"
+                    } gap-x-2`}
+                  >
+                    1 {/* First page number */}
+                  </button>
+                );
+              }
 
-            // Show ellipsis if current page is greater than 3
-            if (page > 3) {
-              pageNumbers.push(
-                <span key="ellipsis-start" className="px-2">
-                  ...
-                </span>
-              );
-            }
+              // Show ellipsis if there are pages in between
+              if (page > 3) {
+                pageNumbers.push(
+                  <span
+                    key="ellipsis-left"
+                    className="flex items-center justify-center text-lg font-semibold"
+                  >
+                    ...
+                  </span>
+                );
+              }
 
-            // Show the previous, current, and next pages
-            for (
-              let i = Math.max(1, page - 1);
-              i <= Math.min(totalPages, page + 1);
-              i++
-            ) {
-              pageNumbers.push(
-                <button
-                  key={i}
-                  onClick={() => handlePageChange(i)}
-                  className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
-                    page === i
-                      ? "bg-primary border-primary"
-                      : "bg-secondary hover:bg-primary border-primary"
-                  } gap-x-2`}
-                >
-                  {i}
-                </button>
-              );
-            }
+              // Generate buttons for the current page and surrounding pages
+              for (
+                let i = Math.max(1, page - 1);
+                i <= Math.min(totalPages, page + 1);
+                i++
+              ) {
+                pageNumbers.push(
+                  <button
+                    key={i}
+                    onClick={() => handlePageChange(i)} // Go to selected page
+                    className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+                      i === page
+                        ? "bg-primary border-primary"
+                        : "bg-secondary hover:bg-primary border-primary"
+                    } gap-x-2`}
+                  >
+                    {i} {/* Current page number */}
+                  </button>
+                );
+              }
 
-            // Show ellipsis if current page is less than totalPages - 2
-            if (page < totalPages - 2) {
-              pageNumbers.push(
-                <span key="ellipsis-end" className="px-2">
-                  ...
-                </span>
-              );
-            }
+              // Show ellipsis if there are pages after the current page
+              if (page < totalPages - 2) {
+                pageNumbers.push(
+                  <span
+                    key="ellipsis-right"
+                    className="flex items-center justify-center text-lg font-semibold"
+                  >
+                    ...
+                  </span>
+                );
+              }
 
-            // Show the last page if it's not the current or next page
-            if (page < totalPages) {
-              pageNumbers.push(
-                <button
-                  key={totalPages}
-                  onClick={() => handlePageChange(totalPages)}
-                  className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
-                    page === totalPages
-                      ? "bg-primary border-primary"
-                      : "bg-secondary hover:bg-primary border-primary"
-                  } gap-x-2`}
-                >
-                  {totalPages}
-                </button>
-              );
-            }
+              // Show the last page if it's not the current page
+              if (page < totalPages - 1) {
+                pageNumbers.push(
+                  <button
+                    key={totalPages}
+                    onClick={() => handlePageChange(totalPages)} // Go to last page
+                    className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+                      page === totalPages
+                        ? "bg-primary border-primary"
+                        : "bg-secondary hover:bg-primary border-primary"
+                    } gap-x-2`}
+                  >
+                    {totalPages} {/* Last page number */}
+                  </button>
+                );
+              }
 
-            return pageNumbers;
-          })()
-        ) : (
-          <div className="flex bg-gray-400 cursor-not-allowed items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm gap-x-2">
-            Loading pages...
-          </div>
-        )}
+              return pageNumbers; // Return the generated page numbers
+            })()
+          : null}
 
         {/* Next button */}
         <button
-          onClick={() => handlePageChange(page + 1)}
-          disabled={nextPage === null || loading}
+          onClick={() => handlePageChange(page + 1)} // Go to next page
+          disabled={!nextPage} // Disable if no next page
           className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
-            nextPage === null || loading
+            !nextPage
               ? "bg-gray-400 cursor-not-allowed border-gray-400"
               : "bg-secondary hover:bg-primary border-primary"
           } gap-x-2`}
         >
-          Next <BsArrowRight size={20} />
+          Next <BsArrowRight size={20} /> {/* Next button label */}
         </button>
       </div>
     </div>
