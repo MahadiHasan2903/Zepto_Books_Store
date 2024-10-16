@@ -13,6 +13,7 @@ const AllBooks = () => {
   const [genre, setGenre] = useState("");
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState([]);
+  const [totalBooks, setTotalBooks] = useState(1);
   const [previousPage, setPreviousPage] = useState("");
   const [nextPage, setNextPage] = useState("");
 
@@ -37,6 +38,7 @@ const AllBooks = () => {
     }));
 
     // Update state with fetched data and pagination info
+    setTotalBooks(getAllBooksData.count);
     setPreviousPage(getAllBooksData.previous);
     setNextPage(getAllBooksData.next);
     setBooks(extractedBooks);
@@ -117,42 +119,127 @@ const AllBooks = () => {
       {/* Display the extracted books */}
       <div className="my-20">
         {loading ? (
-          <Loader /> // Show loader while data is being fetched
+          <Loader />
         ) : (
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {books.map((book, index) => (
-              <BookCard key={index} {...book} /> // Render each book card
+              <BookCard key={index} {...book} />
             ))}
           </div>
         )}
       </div>
       <div className="flex items-center justify-center gap-x-3">
+        {/* Previous button */}
         <button
-          onClick={() => handlePageChange(page - 1)} // Navigate to previous page
-          disabled={page === 1 || previousPage === null} // Disable button if on first page or no previous page
+          onClick={() => handlePageChange(page - 1)}
+          disabled={page === 1 || previousPage === null}
           className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
             page === 1 || previousPage === null
               ? "bg-gray-400 cursor-not-allowed border-gray-400"
               : "bg-secondary hover:bg-primary border-primary"
           } gap-x-2`}
         >
-          <BsArrowLeft size={20} /> Previous {/* Previous page button */}
+          <BsArrowLeft size={20} /> Previous
         </button>
 
-        <button className="flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm bg-secondary hover:bg-primary border-primary gap-x-2">
-          {page} {/* Display current page number */}
-        </button>
+        {/* Only render page numbers if books.length is greater than 0 */}
+        {books.length > 0 && totalBooks > 0 ? (
+          (() => {
+            const totalPages = Math.ceil(totalBooks / books.length);
+            const pageNumbers = [];
 
+            // Show the first page if it's not the current page
+            if (page > 2) {
+              pageNumbers.push(
+                <button
+                  key={1}
+                  onClick={() => handlePageChange(1)}
+                  className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+                    page === 1
+                      ? "bg-primary border-primary"
+                      : "bg-secondary hover:bg-primary border-primary"
+                  } gap-x-2`}
+                >
+                  1
+                </button>
+              );
+            }
+
+            // Show ellipsis if current page is greater than 3
+            if (page > 3) {
+              pageNumbers.push(
+                <span key="ellipsis-start" className="px-2">
+                  ...
+                </span>
+              );
+            }
+
+            // Show the previous, current, and next pages
+            for (
+              let i = Math.max(1, page - 1);
+              i <= Math.min(totalPages, page + 1);
+              i++
+            ) {
+              pageNumbers.push(
+                <button
+                  key={i}
+                  onClick={() => handlePageChange(i)}
+                  className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+                    page === i
+                      ? "bg-primary border-primary"
+                      : "bg-secondary hover:bg-primary border-primary"
+                  } gap-x-2`}
+                >
+                  {i}
+                </button>
+              );
+            }
+
+            // Show ellipsis if current page is less than totalPages - 2
+            if (page < totalPages - 2) {
+              pageNumbers.push(
+                <span key="ellipsis-end" className="px-2">
+                  ...
+                </span>
+              );
+            }
+
+            // Show the last page if it's not the current or next page
+            if (page < totalPages) {
+              pageNumbers.push(
+                <button
+                  key={totalPages}
+                  onClick={() => handlePageChange(totalPages)}
+                  className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+                    page === totalPages
+                      ? "bg-primary border-primary"
+                      : "bg-secondary hover:bg-primary border-primary"
+                  } gap-x-2`}
+                >
+                  {totalPages}
+                </button>
+              );
+            }
+
+            return pageNumbers;
+          })()
+        ) : (
+          <div className="flex bg-gray-400 cursor-not-allowed items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm gap-x-2">
+            Loading pages...
+          </div>
+        )}
+
+        {/* Next button */}
         <button
-          onClick={() => handlePageChange(page + 1)} // Navigate to next page
-          disabled={nextPage === null} // Disable button if no next page
+          onClick={() => handlePageChange(page + 1)}
+          disabled={nextPage === null || loading}
           className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
-            nextPage === null
+            nextPage === null || loading
               ? "bg-gray-400 cursor-not-allowed border-gray-400"
               : "bg-secondary hover:bg-primary border-primary"
           } gap-x-2`}
         >
-          Next <BsArrowRight size={20} /> {/* Next page button */}
+          Next <BsArrowRight size={20} />
         </button>
       </div>
     </div>
