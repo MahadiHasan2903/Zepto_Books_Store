@@ -1,7 +1,20 @@
-import { AiFillEye, AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { AiOutlineHeart } from "react-icons/ai";
+import { IoMdHeart } from "react-icons/io";
+import { useWishlist } from "../../context/WishlistContext"; // Import the context hook
 
-const BookCard = ({ id, title, authors, coverImage }) => {
+const BookCard = ({ id, title, authors, coverImage, genres }) => {
+  const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
+  const isInWishlist = wishlist.some((item) => item.id === id);
+
+  const handleWishlistClick = () => {
+    if (isInWishlist) {
+      removeFromWishlist(id);
+    } else {
+      addToWishlist({ id, title, authors, coverImage, genres });
+    }
+  };
+
   return (
     <div className="w-full flex flex-col items-center h-[40vh] relative mb-10 border border-black border-opacity-10">
       <Link
@@ -15,14 +28,19 @@ const BookCard = ({ id, title, authors, coverImage }) => {
         />
       </Link>
       <div className="absolute flex flex-col right-4 top-4 gap-y-2">
-        <AiFillEye
-          size={25}
-          className="p-1 bg-white rounded-full cursor-pointer text-tertiary w-7 h-7"
-        />
-        <AiOutlineHeart
-          size={25}
-          className="p-1 bg-white rounded-full cursor-pointer text-tertiary w-7 h-7"
-        />
+        {isInWishlist ? (
+          <IoMdHeart
+            size={25}
+            className="p-1 bg-white rounded-full cursor-pointer text-tertiary w-7 h-7"
+            onClick={handleWishlistClick}
+          />
+        ) : (
+          <AiOutlineHeart
+            size={25}
+            className="p-1 bg-white rounded-full cursor-pointer text-tertiary w-7 h-7"
+            onClick={handleWishlistClick}
+          />
+        )}
       </div>
       <div className="flex flex-col items-center justify-center mt-4">
         <p className="text-sm uppercase font-Josefin">

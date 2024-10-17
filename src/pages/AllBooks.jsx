@@ -102,7 +102,7 @@ const AllBooks = () => {
         {/* Dropdown for genre selection */}
         <div className="relative w-64">
           <div
-            className="flex justify-between items-center py-3 px-5 bg-black text-white font-Josefin cursor-pointer"
+            className="flex items-center justify-between px-5 py-3 text-white bg-black cursor-pointer font-Josefin"
             onClick={() => setIsOpen(!isOpen)} // Toggle dropdown visibility
           >
             <span>
@@ -115,11 +115,11 @@ const AllBooks = () => {
           </div>
 
           {isOpen && (
-            <ul className="absolute z-10 w-full bg-black text-white font-Josefin">
+            <ul className="absolute z-10 w-full text-white bg-black font-Josefin">
               {genres.map((genre) => (
                 <li
                   key={genre.value}
-                  className="py-1 px-5 cursor-pointer hover:bg-gray-800"
+                  className="px-5 py-1 cursor-pointer hover:bg-gray-800"
                   onClick={() => handleSelect(genre.value)} // Handle genre selection
                 >
                   {genre.label} {/* Display genre label */}
@@ -154,7 +154,7 @@ const AllBooks = () => {
             ))}
           </div>
         ) : (
-          <h1 className="text-3xl text-tertiary font-semibold font-Josefin text-center">
+          <h1 className="text-3xl font-semibold text-center text-tertiary font-Josefin">
             No Books Found {/* Message when no books are found */}
           </h1>
         )}
