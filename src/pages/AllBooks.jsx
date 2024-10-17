@@ -131,9 +131,10 @@ const AllBooks = () => {
 
         {/* Search button */}
         <button
+          disabled={loading}
           className={`${
-            loading ? "disable cursor-not-allowed bg-gray-500" : "bg-primary"
-          } px-10 py-3 transition-all font-Josefin text-white`}
+            loading && "cursor-not-allowed"
+          } px-10 py-3 transition-all font-Josefin text-white bg-primary`}
           onClick={() => {
             setPage(1); // Reset to first page when searching
             handleSearch(); // Trigger the search immediately
