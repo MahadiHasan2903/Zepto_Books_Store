@@ -36,8 +36,6 @@ const BookDetails = () => {
     handleSearchBookDetails(); // Call the search function whenever id changes
   }, [id]); // Dependency array includes id
 
-  console.log(bookDetails);
-
   return (
     <div className="max-w-[1440px] mx-auto mt-40 mb-20">
       {loading ? (
@@ -54,60 +52,60 @@ const BookDetails = () => {
             )}
           </div>
           <div className="w-1/2">
-            <div className="flex items-start mb-8 w-full border-b border-gray-400 pb-3">
-              <p className="w-52 font-medium flex items-center text-lg gap-x-4 ">
+            <div className="flex items-start w-full pb-3 mb-8 border-b border-gray-400">
+              <p className="flex items-center text-lg font-medium w-52 gap-x-4 ">
                 <FaHashtag size={20} />
                 Book ID
               </p>
-              <p className="px-5 text-md ml-5 w-full mt-0">{bookDetails?.id}</p>
+              <p className="w-full px-5 mt-0 ml-5 text-md">{bookDetails?.id}</p>
             </div>
-            <div className="flex items-start mb-8 w-full border-b border-gray-400 pb-3">
-              <p className="w-52 font-medium flex items-center text-lg gap-x-4 ">
+            <div className="flex items-start w-full pb-3 mb-8 border-b border-gray-400">
+              <p className="flex items-center text-lg font-medium w-52 gap-x-4 ">
                 <FaBook size={20} />
                 Title
               </p>
-              <p className="px-5 text-md ml-5 w-full mt-0">
+              <p className="w-full px-5 mt-0 ml-5 text-md">
                 {bookDetails?.title}
               </p>
             </div>
-            <div className="flex items-start mb-8 w-full border-b border-gray-400 pb-3">
-              <p className="w-52 font-medium flex items-center text-lg gap-x-4 ">
+            <div className="flex items-start w-full pb-3 mb-8 border-b border-gray-400">
+              <p className="flex items-center text-lg font-medium w-52 gap-x-4 ">
                 <MdGroups size={20} />
                 Authors
               </p>
-              <p className="px-5 text-md ml-5 w-full mt-0">
+              <p className="w-full px-5 mt-0 ml-5 text-md">
                 {bookDetails?.authors}
               </p>
             </div>
-            <div className="flex items-start mb-8 w-full border-b border-gray-400 pb-3">
-              <p className="w-52 font-medium flex items-center text-lg gap-x-4 ">
+            <div className="flex items-start w-full pb-3 mb-8 border-b border-gray-400">
+              <p className="flex items-center text-lg font-medium w-52 gap-x-4 ">
                 <MdSubject size={20} />
                 Genre
               </p>
-              <p className="px-5 text-md ml-5 w-full mt-0">
+              <p className="w-full px-5 mt-0 ml-5 text-md">
                 {bookDetails?.genres}
               </p>
             </div>
-            <div className="flex items-start mb-8 w-full border-b border-gray-400 pb-3">
-              <p className="w-52 font-medium flex items-center text-lg gap-x-4 ">
+            <div className="flex items-start w-full pb-3 mb-8 border-b border-gray-400">
+              <p className="flex items-center text-lg font-medium w-52 gap-x-4 ">
                 <GrLanguage size={20} />
                 Languages
               </p>
-              <p className="px-5 text-md ml-5 w-full mt-0 uppercase">
+              <p className="w-full px-5 mt-0 ml-5 uppercase text-md">
                 {bookDetails?.languages}
               </p>
             </div>
-            <div className="flex items-start mb-8 w-full border-b border-gray-400 pb-3">
-              <p className="w-52 font-medium flex items-center text-lg gap-x-4 ">
+            <div className="flex items-start w-full pb-3 mb-8 border-b border-gray-400">
+              <p className="flex items-center text-lg font-medium w-52 gap-x-4 ">
                 <HiOutlineCloudDownload size={20} />
                 Downloads
               </p>
-              <p className="px-5 ml-5 w-full mt-0">
+              <p className="w-full px-5 mt-0 ml-5">
                 {bookDetails?.totalDownloads}
               </p>
             </div>
 
-            <button className="px-4 font-semibold mt-10 py-3 text-white flex text-lg items-center justify-center gap-x-3 rounded-md bg-tertiary">
+            <button className="flex items-center justify-center px-4 py-3 mt-10 text-lg font-semibold text-white rounded-md gap-x-3 bg-tertiary">
               Add to Wishlist <AiOutlineHeart size={25} />
             </button>
           </div>

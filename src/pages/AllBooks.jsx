@@ -61,7 +61,29 @@ const AllBooks = () => {
     if (searchTerm) params.set("search", searchTerm);
     if (genre) params.set("topic", genre);
 
-    navigate(`/all-books?${params.toString()}`); // Navigate to the updated URL
+    navigate(`/all-books?${params.toString()}`);
+
+    // Store search preferences in localStorage
+    if (searchTerm || genre) {
+      // Only store if at least one is non-empty
+      const currentPreference = {
+        searchTerm: searchTerm || "", // Store empty string if searchTerm is empty
+        genre: genre || "", // Store empty string if genre is empty
+      };
+
+      // Get existing search preferences from localStorage or initialize an empty array
+      const storedPreferences =
+        JSON.parse(localStorage.getItem("searchPreferences")) || [];
+
+      // Push the current preference into the array
+      storedPreferences.push(currentPreference);
+
+      // Store the updated preferences array back into localStorage
+      localStorage.setItem(
+        "searchPreferences",
+        JSON.stringify(storedPreferences)
+      );
+    }
   };
 
   // Automatically call handleSearch when the page changes
