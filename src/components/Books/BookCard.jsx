@@ -25,8 +25,8 @@ const BookCard = ({ id, title, authors, coverImage, genres }) => {
       >
         <img
           src={coverImage} // Display the book cover image
-          alt={`${title} cover`} // Set alt text for accessibility
-          className="object-contain w-full h-[30vh]" // Adjust image size and containment
+          alt={`${title} cover`}
+          className="object-contain w-full h-[30vh] animate-slide-in"
         />
       </Link>
 

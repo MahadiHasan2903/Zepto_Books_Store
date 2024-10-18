@@ -58,7 +58,7 @@ const BookDetails = () => {
               <img
                 src={bookDetails.coverImage}
                 alt={bookDetails.title}
-                className="w-[300px] lg:w-[400px] h-[50vh] lg:h-[60vh] border border-black border-opacity-30 p-2"
+                className="w-[300px] lg:w-[400px] animate-slide-in h-[50vh] lg:h-[60vh] border border-black border-opacity-30 p-2"
               />
             )}
           </div>
