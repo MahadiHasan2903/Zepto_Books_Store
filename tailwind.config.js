@@ -14,8 +14,8 @@ export default {
         secondary_background: "#232323",
       },
       backgroundImage: {
-        hero: "url(./src/assets/bg_image.webp)",
-        footer: "url(./src/assets/footer.webp)",
+        hero: "url(./src/assets/bg_image.png)",
+        footer: "url(./src/assets/footer.png)",
       },
       keyframes: {
         slideIn: {
