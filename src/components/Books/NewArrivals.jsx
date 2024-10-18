@@ -6,6 +6,7 @@ import { getAllBooks } from "../../api";
 import { Loader } from "../Layout";
 
 const NewArrivals = () => {
+  //States
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState([]);
 
@@ -35,14 +36,14 @@ const NewArrivals = () => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center max-w-[1440px] mx-auto mt-20">
+    <div className="flex flex-col justify-center max-w-full lg:max-w-[1280px] mx-auto mt-20">
       <SectionHeader title="New Arrivals" />
 
       {/* Display the extracted books */}
       {loading ? (
         <Loader />
       ) : (
-        <div className="grid grid-cols-1 gap-10 mt-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 mx-6 mt-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:mx-0">
           {books.slice(0, 8).map((book, index) => (
             <BookCard key={index} {...book} />
           ))}
@@ -53,7 +54,7 @@ const NewArrivals = () => {
         <Button
           title="View All Books"
           link="/all-books"
-          styles="px-4 font-semibold py-3 flex text-lg text-white items-center justify-center gap-x-3 rounded-md bg-tertiary"
+          styles="px-2 lg:px-4 font-semibold py-2 lg:py-3 text-white flex text-sm lg:text-lg items-center justify-center gap-x-3 rounded-md bg-tertiary"
           icon={GoArrowRight}
         />
       </div>

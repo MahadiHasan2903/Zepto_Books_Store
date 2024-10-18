@@ -110,9 +110,9 @@ const AllBooks = () => {
   }, []); // Empty dependency array to run only once on mount
 
   return (
-    <div className="max-w-[1440px] mx-auto mt-40 mb-20">
+    <div className="max-w-full lg:max-w-[1280px] lg:mx-auto mx-5 mt-24 lg:mt-40 mb-20">
       <SectionHeader title="All Books" /> {/* Section header for the page */}
-      <div className="flex items-center mb-10 gap-x-5">
+      <div className="flex flex-col items-start mb-10 lg:items-center gap-y-3 lg:gap-y-0 lg:flex-row gap-x-5">
         {/* Search input for book title */}
         <input
           type="text"
@@ -124,7 +124,7 @@ const AllBooks = () => {
         {/* Dropdown for genre selection */}
         <div className="relative w-64">
           <div
-            className="flex items-center justify-between px-5 py-3 text-white bg-black cursor-pointer font-Josefin"
+            className="flex items-center justify-between px-3 py-3 text-white bg-black cursor-pointer lg:px-5 font-Josefin"
             onClick={() => setIsOpen(!isOpen)} // Toggle dropdown visibility
           >
             <span>
@@ -181,18 +181,20 @@ const AllBooks = () => {
           </h1>
         )}
       </div>
-      <div className="flex items-center justify-center gap-x-3">
+      <div className="flex items-center justify-center max-w-full gap-x-3">
         {/* Previous button */}
         <button
           onClick={() => handlePageChange(page - 1)} // Go to previous page
           disabled={page === 1 || previousPage === null} // Disable if on the first page or no previous page
-          className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+          className={`flex items-center justify-center p-2 lg:px-4 lg:py-2 text-sm lg:text-lg font-semibold text-white transition-all border rounded-sm ${
             page === 1 || previousPage === null
               ? "bg-gray-400 cursor-not-allowed border-gray-400"
               : "bg-secondary hover:bg-primary border-primary"
           } gap-x-2`}
         >
-          <BsArrowLeft size={20} /> Previous {/* Previous button label */}
+          <BsArrowLeft size={20} />{" "}
+          <span className="hidden lg:block"> Previous </span>
+          {/* Previous button label */}
         </button>
 
         {/* Only render page numbers if books.length is greater than 0 */}
@@ -207,7 +209,7 @@ const AllBooks = () => {
                   <button
                     key={1}
                     onClick={() => handlePageChange(1)} // Go to first page
-                    className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+                    className={`flex items-center justify-center p-2 lg:px-4 lg:py-2 text-sm lg:text-lg font-semibold text-white transition-all border rounded-sm ${
                       page === 1
                         ? "bg-primary border-primary"
                         : "bg-secondary hover:bg-primary border-primary"
@@ -240,7 +242,7 @@ const AllBooks = () => {
                   <button
                     key={i}
                     onClick={() => handlePageChange(i)} // Go to selected page
-                    className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+                    className={`flex items-center justify-center p-2 lg:px-4 lg:py-2 text-sm lg:text-lg font-semibold text-white transition-all border rounded-sm ${
                       i === page
                         ? "bg-primary border-primary"
                         : "bg-secondary hover:bg-primary border-primary"
@@ -269,7 +271,7 @@ const AllBooks = () => {
                   <button
                     key={totalPages}
                     onClick={() => handlePageChange(totalPages)} // Go to last page
-                    className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+                    className={`flex items-center justify-center p-2 lg:px-4 lg:py-2 text-sm lg:text-lg font-semibold text-white transition-all border rounded-sm ${
                       page === totalPages
                         ? "bg-primary border-primary"
                         : "bg-secondary hover:bg-primary border-primary"
@@ -288,13 +290,14 @@ const AllBooks = () => {
         <button
           onClick={() => handlePageChange(page + 1)} // Go to next page
           disabled={!nextPage} // Disable if no next page
-          className={`flex items-center justify-center px-4 py-2 text-lg font-semibold text-white transition-all border rounded-sm ${
+          className={`flex items-center justify-center p-2 lg:px-4 lg:py-2 text-sm lg:text-lg font-semibold text-white transition-all border rounded-sm ${
             !nextPage
               ? "bg-gray-400 cursor-not-allowed border-gray-400"
               : "bg-secondary hover:bg-primary border-primary"
           } gap-x-2`}
         >
-          Next <BsArrowRight size={20} /> {/* Next button label */}
+          <span className="hidden lg:block"> Next </span>
+          <BsArrowRight size={20} /> {/* Next button label */}
         </button>
       </div>
     </div>

@@ -10,8 +10,8 @@ const Wishlist = ({ onClose }) => {
   };
 
   return (
-    <div className="h-[100vh] fixed z-[99999] top-0 w-[350px] right-0">
-      <div className="w-full h-full p-4 bg-white">
+    <div className="h-[100vh] fixed z-[99999] top-0 w-[250px] lg:w-[350px] right-0">
+      <div className="w-full h-full p-4 bg-primary_background lg:bg-white">
         <div className="flex items-center justify-between pb-3 my-3 border-b border-gray-200">
           <h1 className="text-2xl font-semibold font-Josefin">Wishlist</h1>
           <RxCross1

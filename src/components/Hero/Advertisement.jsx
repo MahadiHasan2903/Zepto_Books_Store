@@ -2,8 +2,8 @@ import { advertisementData } from "../../assets/data";
 
 const Advertisement = () => {
   return (
-    <div className="bg-primary_background">
-      <div className="max-w-[1440px] mx-auto">
+    <div className="hidden bg-primary_background lg:block">
+      <div className="max-w-[1280px] mx-auto">
         <div className="flex items-center justify-between py-8">
           {advertisementData.map((item, index) => (
             <div key={index} className="flex items-center gap-x-5">

@@ -4,7 +4,7 @@ import { NewsLetter } from "../components/Layout";
 
 const Home = () => {
   return (
-    <div>
+    <div className="w-full">
       <Banner />
       <Advertisement />
       <NewArrivals />

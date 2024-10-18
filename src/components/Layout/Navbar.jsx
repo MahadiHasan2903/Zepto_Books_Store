@@ -16,24 +16,28 @@ const Navbar = () => {
   };
 
   return (
-    <div className="relative z-50 flex items-center justify-center">
-      <div className="fixed top-0 z-50 w-full px-8 py-3 shadow-md bg-primary_background">
-        <div className="flex items-center justify-between w-[1440px] mx-auto">
-          <Link to="/" className="w-1/6">
+    <div className="w-full relative z-[99] flex items-center justify-center">
+      <div className="fixed top-0 z-[99] w-full px-3 xl:px-8 py-3 shadow-md bg-primary_background">
+        <div className="flex items-center justify-between w-full xl:w-[1280px] mx-auto">
+          <Link to="/">
             <div className="flex items-center w-full gap-x-5">
-              <img src={logo} alt="logo" className="w-[70px] h-[70px]" />
-              <p className="text-2xl font-bold">Zepto Store</p>
+              <img
+                src={logo}
+                alt="logo"
+                className="w-10 h-10 xl:w-[70px] xl:h-[70px]"
+              />
+              <p className="text-lg font-bold xl:text-2xl">Zepto Store</p>
             </div>
           </Link>
 
           {/* Navbar section */}
-          <div className="flex justify-center">
-            <div className="relative flex items-center w-full gap-x-14">
+          <div className="justify-center hidden md:flex ">
+            <div className="relative flex items-center w-full gap-x-5 lg:gap-x-8 xl:gap-x-12">
               {navItems.map((link, index) => (
                 <Link
                   key={index}
                   to={link.to}
-                  className="text-lg font-medium transition-all text-primary hover:text-tertiary font-Josefin"
+                  className="text-sm font-medium transition-all lg:text-lg text-primary hover:text-tertiary font-Josefin"
                 >
                   {link.label}
                 </Link>
@@ -42,7 +46,7 @@ const Navbar = () => {
           </div>
 
           {/* User action icons */}
-          <div className="flex items-center justify-end w-1/6">
+          <div className="flex items-center justify-end ">
             <div className="flex items-center gap-x-5">
               <div className="flex items-center">
                 <div
